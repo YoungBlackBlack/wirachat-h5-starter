@@ -11,9 +11,12 @@
 //
 // 依赖:
 //   - /web/api.js 的 Api.getImSession 拿 sdkAppId + imUserId + userSig
-//   - 从 unpkg 加载 @tencentcloud/chat(宿主可替换成自托管 /assets/tim.min.js)
+//   - SDK 默认从 /web/vendor/tim-js.js 加载(同仓库自托管,避免 CSP / CDN 风险)
+//   - 如需换源,传 options.cdnUrl 或直接改 TIM_CDN_URL 常量
 
-const TIM_CDN_URL = "https://unpkg.com/@tencentcloud/chat@latest/dist/umd/tim-js.js";
+// 默认走本仓库 vendor 的 UMD 文件(见 scripts/vendor-im-sdk.sh)。
+// 业务项目如果把 SDK 放到自家 CDN/COS,改这个常量或调用时传 options.cdnUrl。
+const TIM_CDN_URL = "/web/vendor/tim-js.js";
 
 let timSdkPromise = null;
 

@@ -5,6 +5,11 @@
   "type": "module",
   "description": "WebView/H5 app starter — auth + COS 直传 + IM + Design System + 部署脚手架",
   "scripts": {
+    "postinstall": "(test -f web/vendor/tim-js.js || bash scripts/vendor-im-sdk.sh) && (test -f assets/vconsole.min.js || bash scripts/vendor-vconsole.sh)",
+    "vendor:im": "bash scripts/vendor-im-sdk.sh",
+    "vendor:im:update": "bash scripts/vendor-im-sdk.sh --update-sha",
+    "vendor:vconsole": "bash scripts/vendor-vconsole.sh",
+    "vendor:vconsole:update": "bash scripts/vendor-vconsole.sh --update-sha",
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",
     "start:test": "APP_ENV=test node server/index.js",

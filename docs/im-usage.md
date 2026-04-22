@@ -73,6 +73,18 @@ await client.sendText({ to: "dev_99", text: "hi" });
 
 复杂场景(群聊、图片消息)直接用 `client.chat` 调原生 SDK。
 
+## SDK 文件的管理
+
+腾讯 IM Web SDK(`@tencentcloud/chat`)的 UMD build vendor 在 `web/vendor/tim-js.js`:
+
+- **为什么自托管**: CSP 默认 `script-src 'self'`,外部 CDN 会被挡;自托管同源不受影响,也规避 unpkg 被墙/限流
+- **首次 clone 后**: `npm install` 会自动跑 `scripts/vendor-im-sdk.sh` 把文件拉下来
+- **升级 SDK**:
+  1. 改 `package.json` 里的 `@tencentcloud/chat` 版本号
+  2. `npm run vendor:im:update`(下载新版 + 写入新 sha)
+  3. 把 `web/vendor/tim-js.js` 和 `web/vendor/tim-js.js.sha256` 一起提交
+- **完整性校验**: `scripts/vendor-im-sdk.sh` 每次跑都会跟 `tim-js.js.sha256` 对照,不匹配直接退出非 0
+
 ## 测试页
 
 打开 `/im-playground.html`:
