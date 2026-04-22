@@ -1,6 +1,6 @@
 {
   "name": "wirachat-h5-starter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "description": "WebView/H5 app starter — auth + COS 直传 + IM + Design System + 部署脚手架",
