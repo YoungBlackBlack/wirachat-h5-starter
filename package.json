@@ -1,0 +1,33 @@
+{
+  "name": "wirachat-h5-starter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "WebView/H5 app starter — auth + COS 直传 + IM + Design System + 部署脚手架",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "start:test": "APP_ENV=test node server/index.js",
+    "start:production": "APP_ENV=production node server/index.js",
+    "dev:test": "APP_ENV=test node --watch server/index.js",
+    "dev:production": "APP_ENV=production node --watch server/index.js",
+    "test": "node --test",
+    "db:init": "node server/init-db.js",
+    "db:init:test": "APP_ENV=test node server/init-db.js",
+    "db:init:production": "APP_ENV=production node server/init-db.js",
+    "db:inspect": "node server/inspect-db.js",
+    "db:inspect:test": "APP_ENV=test node server/inspect-db.js",
+    "db:inspect:production": "APP_ENV=production node server/inspect-db.js",
+    "deploy:test": "bash ./scripts/deploy.sh test",
+    "deploy:production": "bash ./scripts/deploy.sh production"
+  },
+  "dependencies": {
+    "@tencentcloud/chat": "^3.6.6",
+    "cors": "^2.8.5",
+    "cos-nodejs-sdk-v5": "^2.14.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "mysql2": "^3.15.2",
+    "tls-sig-api-v2": "^1.0.2"
+  }
+}

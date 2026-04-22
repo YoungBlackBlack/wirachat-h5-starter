@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Montserrat:wght@500&display=swap" rel="stylesheet"><style>
+@font-face{font-family:"Alimama ShuHeiTi";src:url("../fonts/AlimamaShuHeiTi-Bold.otf") format("opentype");font-weight:700 900;font-display:swap}
+body{background:#000;color:#fff;font-family:"PingFang SC","Noto Sans SC",sans-serif;margin:0;padding:22px 28px;height:100vh;box-sizing:border-box;display:flex;gap:28px;align-items:center;justify-content:center}
+h4{margin:0 0 8px;font-size:10px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;font-family:Montserrat,sans-serif}
+.col{display:flex;flex-direction:column;min-width:0}
+
+/* ==== feed-post (no container bg, transparent; padding-top:8px) ==== */
+.post{width:300px;padding-top:8px;display:flex;flex-direction:column;font-family:"PingFang SC","Noto Sans SC",sans-serif}
+.head{display:flex;align-items:center;gap:6px;padding:8px 0}
+.av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c49d6b,#3b2a1a);flex-shrink:0;object-fit:cover}
+.usercopy{min-width:0;flex:1;display:flex;flex-direction:column;gap:1px}
+.urow{display:flex;align-items:center;gap:6px}
+.uname{overflow:hidden;color:rgba(255,255,255,.8);font-size:12px;font-weight:600;line-height:18px;text-overflow:ellipsis;white-space:nowrap}
+.utime{color:rgba(255,255,255,.5);font-size:12px;line-height:14px;font-family:Montserrat,sans-serif}
+.badge{display:inline-flex;align-items:center;gap:2px;padding:1px 4px 1px 0;border-radius:8px;background:rgba(0,0,0,.25)}
+.badge span{font-family:Montserrat,sans-serif;font-size:12px;font-weight:500;line-height:14px;color:#ff6fad}
+.badge svg{width:14px;height:14px}
+
+/* exchange lines (left gutter 42 for gallery alignment) */
+.ex{display:flex;flex-direction:column;gap:3px;padding:4px 0}
+.exrow{display:flex;align-items:center;gap:7px}
+.chip{width:28px;height:28px;border-radius:18px;display:grid;place-items:center;flex-shrink:0;font-family:"Alimama ShuHeiTi","Noto Sans SC",sans-serif;font-size:14px;font-weight:700;line-height:1}
+.have{border:1.5px solid #fff;color:#fff}
+.want{border:1.5px solid #ff8d2f;color:#ff8d2f}
+.extext{color:#fff;font-size:14px;font-weight:600;line-height:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* gallery (padding-left 42 to align with exchange text) */
+.gal{position:relative;display:flex;gap:3px;padding-left:42px;margin-top:6px}
+.gi{position:relative;flex:1 1 0;aspect-ratio:1/1;overflow:hidden;background:#222}
+.gi:first-child{border-radius:12px 0 0 12px}
+.gi:last-child{border-radius:0 12px 12px 0}
+.gi img{width:100%;height:100%;object-fit:cover;display:block}
+.swap{position:absolute;left:calc(50% + 21.5px);top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;gap:2px;padding:6px 4px 6px 6px;border-radius:58px;background:#000;color:#dfe8f5;font-family:"Alimama ShuHeiTi","Noto Sans SC",sans-serif;font-size:12px;font-weight:700;line-height:1;border:0;cursor:pointer}
+.swap svg{width:12px;height:12px}
+
+/* actions */
+.acts{display:flex;align-items:center;justify-content:flex-end;gap:20px;padding:8px}
+.act{display:inline-flex;align-items:center;gap:4px;color:rgba(255,255,255,.6);background:transparent;border:0;font-family:Montserrat,sans-serif;font-size:13px;cursor:pointer}
+.act img{width:20px;height:20px;filter:invert(1) brightness(2)}
+</style></head><body>
+
+<div class="col">
+<h4>Feed post · transparent, 42px gutter, gallery inline with chip text</h4>
+<article class="post">
+  <div class="head">
+    <div class="av"></div>
+    <div class="usercopy">
+      <div class="urow">
+        <span class="uname">桃桃不换季</span>
+        <span class="badge"><svg viewBox="0 0 14 14" fill="#ff6fad"><circle cx="7" cy="5" r="3" fill="none" stroke="#ff6fad" stroke-width="1.2"/><path d="M7 8v4M5 11h4" stroke="#ff6fad" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg><span>20</span></span>
+      </div>
+      <span class="utime">8分钟前</span>
+    </div>
+  </div>
+
+  <div class="ex">
+    <div class="exrow"><span class="chip have">有</span><span class="extext">拍立得相纸一盒</span></div>
+    <div class="exrow"><span class="chip want">换</span><span class="extext">咖啡豆或手冲器具</span></div>
+  </div>
+
+  <div class="gal">
+    <div class="gi"><img src="https://images.unsplash.com/photo-1554941426-5b0f5a49a5a3?w=400&auto=format&fit=crop"></div>
+    <div class="gi"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&auto=format&fit=crop"></div>
+    <button class="swap">换<img src="../assets/icons/arrow-right.svg" alt=""></button>
+  </div>
+
+  <div class="acts">
+    <button class="act"><img src="../assets/icons/dislike.svg"><span>91</span></button>
+    <button class="act" style="color:#e8579b"><img src="../assets/icons/like-active.svg" style="filter:none"><span>487</span></button>
+    <button class="act"><img src="../assets/icons/comment.svg"><span>56</span></button>
+  </div>
+</article>
+</div>
+
+</body></html>

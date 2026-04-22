@@ -1,0 +1,245 @@
+/* ==========================================================================
+   微热·物换物 — Colors & Type
+   Source of truth: barter/styles.css (mobile web app) + barter/admin.css (ops)
+   ========================================================================== */
+
+@font-face {
+  font-family: "Alimama ShuHeiTi";
+  src: url("fonts/AlimamaShuHeiTi-Bold.otf") format("opentype");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* ---------- Base colors ---------- */
+  /* Canvas is pure black; content floats on it as transparent white surfaces */
+  --bg:               #000000;
+  --bg-elevated:      #0d0d0d;   /* chat exchange bar, modal shells */
+  --bg-card:          #171717;   /* empty camera frame */
+  --bg-card-muted:    #1b1b1b;   /* match thumb */
+  --bg-mystery:       #353535;   /* mystery slot background */
+  --bg-voice-mode:    #50557b;   /* voice recording frame */
+
+  /* Ink — always white over black, stepped by alpha */
+  --fg1:              #ffffff;                       /* primary text, titles */
+  --fg2:              rgba(255,255,255,0.80);        /* secondary: body copy, usernames */
+  --fg3:              rgba(255,255,255,0.50);        /* tertiary: timestamps, placeholders */
+  --fg4:              rgba(255,255,255,0.30);        /* quaternary: input placeholder */
+  --fg-muted:         #7c7a83;                       /* inactive tabbar */
+  --fg-comment-name:  #808080;                       /* comment author */
+  --fg-system:        #75757d;                       /* chat system line */
+  --fg-subtab-inactive:#94949f;
+
+  /* Transparent whites — the main surface system */
+  --white-04:         rgba(255,255,255,0.04);
+  --white-05:         rgba(255,255,255,0.05);
+  --white-06:         rgba(255,255,255,0.06);
+  --white-08:         rgba(255,255,255,0.08);  /* sheet chips, light input */
+  --white-09:         rgba(255,255,255,0.09);  /* tabbar */
+  --white-10:         rgba(255,255,255,0.10);  /* default card */
+  --white-12:         rgba(255,255,255,0.12);  /* chat audio toggle */
+  --white-13:         rgba(255,255,255,0.13);  /* match sheet */
+  --white-14:         rgba(255,255,255,0.14);  /* selected tab, secondary btn */
+  --white-15:         rgba(255,255,255,0.15);  /* received text bubble */
+  --white-18:         rgba(255,255,255,0.18);  /* drag handle */
+  --white-20:         rgba(255,255,255,0.20);  /* icon button, big chip */
+
+  /* Transparent blacks — scrim & bubble */
+  --black-25:         rgba(0,0,0,0.25);
+  --black-40:         rgba(0,0,0,0.40);        /* owned-tag strip */
+  --black-65:         rgba(0,0,0,0.65);        /* treasure footer scrim */
+  --black-82:         rgba(0,0,0,0.82);        /* detail topbar scrim */
+  --black-88:         rgba(0,0,0,0.88);        /* chat bottom bar */
+  --black-96:         rgba(0,0,0,0.96);        /* admin-adjacent */
+
+  /* ---------- Brand accents ---------- */
+  /* Two paired "token" accents used as capsule pills: yellow (YES / coin) and cyan (NO / audio) */
+  --yes-bg:           #41390f;   /* deep olive — "我想换" button */
+  --yes-fg:           #fff09c;   /* buttery yellow label */
+  --yes-count-bg:     #f4e490;   /* count chip */
+  --yes-count-fg:     #41390f;
+
+  --no-bg:            #083640;   /* deep teal — "下一个" button */
+  --no-fg:            #b2f1ff;   /* pale cyan label */
+  --no-count-bg:      #9bdbea;
+  --no-count-fg:      #083640;
+
+  /* Coin / reward — variation on yes palette */
+  --coin-bg:          #45431e;
+  --coin-fg:          #ffe4a4;
+
+  /* Swap chips (square "有 / 换" circles) */
+  --have-border:      #ffffff;
+  --have-fg:          #ffffff;
+  --want-border:      #ff8d2f;   /* one of the only true oranges */
+  --want-fg:          #ff8d2f;
+
+  /* Tab indicator / active subtab underline */
+  --accent-orange:    #ff7300;
+
+  /* Reactions */
+  --like-pink:        #e8579b;   /* active like (comments) */
+  --dislike-blue:     #4a9fe8;
+  --danger:           #ff6b6b;
+  --danger-solid:     #e75151;
+  --gender-female:    #ff6fad;
+  --gender-male:      #559cff;
+
+  /* Chat message bubbles */
+  --bubble-sent-bg:   #ffe2ba;   /* warm beige — outgoing text */
+  --bubble-sent-fg:   #000000;
+  --bubble-card-bg:   #ffe4be;   /* exchange card inside chat */
+  --link-cyan:        #9bdbea;   /* "show replies" */
+  --brand-silver:     #dfe8f5;   /* 换 pill text */
+
+  /* Wave gradients — voice/audio identifier */
+  --wave-top:         rgba(255,240,156,0.96);
+  --wave-bottom:      rgba(178,241,255,0.92);
+
+  /* ---------- Type families ---------- */
+  --font-display: "Alimama ShuHeiTi", "Alibaba Sans", "PingFang SC", "Helvetica Neue", sans-serif;
+  --font-ui:      "PingFang SC", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-number:  "Montserrat", "SF Pro Display", "Helvetica Neue", sans-serif;
+
+  /* ---------- Type scale (semantic) ---------- */
+  /* Mobile-first. Display sizes are intentionally modest — this app whispers. */
+  --fs-display:   22px;   /* sheet title, largest in product */
+  --fs-h1:        18px;   /* publish hero title, vote label */
+  --fs-h2:        17px;   /* brand title top bar */
+  --fs-h3:        16px;   /* feature titles, match heading */
+  --fs-body:      14px;   /* standard body, feed copy */
+  --fs-body-sm:   13px;
+  --fs-caption:   12px;
+  --fs-micro:     11px;
+  --fs-tabbar:    9px;
+
+  --lh-tight:     1.2;
+  --lh-body:      1.5;
+  --lh-loose:     1.7;
+
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+
+  /* ---------- Radius system ---------- */
+  --r-xs:         4px;
+  --r-sm:         6px;
+  --r-md:         12px;   /* feed gallery, card thumb */
+  --r-lg:         16px;   /* profile card */
+  --r-xl:         24px;   /* publish hero, match sheet */
+  --r-2xl:        32px;   /* camera frame, treasure card */
+  --r-pill:       999px;  /* every button, badge */
+
+  /* ---------- Shadow / elevation ---------- */
+  --shadow-flight:   0 20px 44px rgba(0,0,0,0.34), 0 0 0 1px rgba(255,255,255,0.08);
+  --shadow-toast:    0 16px 32px rgba(0,0,0,0.26);
+  --shadow-button:   0 10px 28px rgba(255,255,255,0.16);
+  --shadow-sheet:    0 -18px 48px rgba(0,0,0,0.42);
+  --shadow-menu:     0 14px 28px rgba(0,0,0,0.35);
+
+  /* ---------- Motion ---------- */
+  --ease-out-swift: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-press:    cubic-bezier(0.2, 0.9, 0.25, 1);
+  --dur-fast:      120ms;
+  --dur-base:      180ms;
+  --dur-slow:      260ms;
+  --dur-card:      560ms;  /* treasure card swipe */
+
+  /* ---------- Spacing ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+}
+
+/* ==========================================================================
+   Semantic text styles — mirror of how text is set across the product
+   ========================================================================== */
+
+.ds-display,
+h1.ds-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--fg1);
+  margin: 0;
+}
+
+.ds-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  color: var(--fg1);
+  margin: 0;
+}
+
+.ds-h3 {
+  font-family: var(--font-ui);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  color: var(--fg1);
+  margin: 0;
+}
+
+.ds-body {
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: 22px;
+  color: var(--fg2);
+  margin: 0;
+}
+
+.ds-body-strong {
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: 22px;
+  color: var(--fg1);
+  margin: 0;
+}
+
+.ds-caption {
+  font-family: var(--font-ui);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-regular);
+  line-height: 18px;
+  color: var(--fg3);
+  margin: 0;
+}
+
+.ds-number {
+  font-family: var(--font-number);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+}
+
+.ds-eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg3);
+  margin: 0;
+}
+
+/* Button / pill label — the shouty yellow/cyan type */
+.ds-pill-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: 0;
+}

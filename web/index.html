@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="build-version" content="0.1.0" />
+    <title>wirachat-h5-starter</title>
+    <link rel="stylesheet" href="/design-system/colors_and_type.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        color: #fff;
+        font-family: "PingFang SC", "Alimama ShuHeiTi", "Helvetica Neue", sans-serif;
+        min-height: 100vh;
+      }
+      main {
+        padding: 24px;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 24px;
+        letter-spacing: 0.04em;
+      }
+      p {
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .status {
+        padding: 12px 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 14px;
+      }
+      .status[data-level="ok"] {
+        border-color: #a6f3d8;
+        color: #a6f3d8;
+      }
+      .status[data-level="warn"] {
+        border-color: #f3e08a;
+        color: #f3e08a;
+      }
+      .status[data-level="error"] {
+        border-color: #f3a6a6;
+        color: #f3a6a6;
+      }
+      ul.links {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0;
+      }
+      ul.links li {
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+      }
+      ul.links a {
+        color: #ffe26a;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>wirachat-h5-starter</h1>
+      <p>WebView/H5 应用空壳。在这里接入你自己的业务逻辑。</p>
+
+      <div class="status" data-status data-level="info">正在启动…</div>
+
+      <ul class="links">
+        <li><a href="/api/health">/api/health</a> — 健康检查 + 配置诊断</li>
+        <li><a href="/im-playground.html">/im-playground.html</a> — IM 登录 + 发消息测试</li>
+        <li>
+          <a href="/design-system/preview/">/design-system/preview/</a> — Design System 预览
+        </li>
+      </ul>
+    </main>
+
+    <script src="/web/debug.js"></script>
+    <script src="/web/webview-identity.js"></script>
+    <script type="module" src="/web/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"><style>
+body{background:#000;color:#fff;font-family:Montserrat,sans-serif;margin:0;padding:22px 28px;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;justify-content:center}
+h4{margin:0 0 2px;font-size:10px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:10px}
+.cell{display:flex;flex-direction:column;align-items:center;gap:5px}
+.ic{width:100%;aspect-ratio:1/1;border-radius:10px;display:grid;place-items:center;padding:8px;box-sizing:border-box;background:rgba(255,255,255,.04)}
+.ic img{width:24px;height:24px;display:block}   /* no filter — show true fill */
+.lbl{font-size:9px;color:rgba(255,255,255,.4);text-align:center;letter-spacing:.04em;line-height:1.3}
+.hex{font-size:8px;color:rgba(255,255,255,.28);font-variant-numeric:tabular-nums}
+.sec{display:flex;flex-direction:column;gap:8px}
+</style></head><body>
+
+<div class="sec">
+<h4>Active · white fill · tab bar active, navigation, CTA</h4>
+<div class="grid">
+<div class="cell"><div class="ic"><img src="../assets/icons/home.svg" style="filter:brightness(0) invert(1)"></div><span class="lbl">home (active)</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/treasure.svg"></div><span class="lbl">treasure</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/send.svg"></div><span class="lbl">send</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/back.svg"></div><span class="lbl">back</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/microphone.svg"></div><span class="lbl">mic</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/camera-flip.svg"></div><span class="lbl">flip</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/album.svg"></div><span class="lbl">album</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/arrow.svg"></div><span class="lbl">arrow</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/arrow-right.svg"></div><span class="lbl">right</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/single-button.svg"></div><span class="lbl">shutter</span></div>
+</div>
+</div>
+
+<div class="sec">
+<h4>Inactive · #7C7A83 tab bar · #999999 feed action</h4>
+<div class="grid">
+<div class="cell"><div class="ic"><img src="../assets/icons/home.svg"></div><span class="lbl">home</span><span class="hex">#7C7A83</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/message.svg"></div><span class="lbl">message</span><span class="hex">#7C7A83</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/profile.svg"></div><span class="lbl">profile</span><span class="hex">#7C7A83</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/search.svg"></div><span class="lbl">search</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/activity.svg"></div><span class="lbl">activity</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/like.svg"></div><span class="lbl">like</span><span class="hex">#999</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/dislike.svg"></div><span class="lbl">dislike</span><span class="hex">#999</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/comment.svg"></div><span class="lbl">comment</span><span class="hex">#999</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/more.svg"></div><span class="lbl">more</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/drafts.svg"></div><span class="lbl">drafts</span></div>
+</div>
+</div>
+
+<div class="sec">
+<h4>Active states · pink like / blue dislike · brand sentiment</h4>
+<div class="grid" style="grid-template-columns:repeat(10,1fr)">
+<div class="cell"><div class="ic"><img src="../assets/icons/like-active.svg"></div><span class="lbl">like ✓</span><span class="hex">#E8579B</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/dislike-active.svg"></div><span class="lbl">dislike ✓</span><span class="hex">#4A9FE8</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/comment-liked.svg"></div><span class="lbl">cmt like ✓</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/comment-unliked.svg"></div><span class="lbl">cmt like</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/exchange.svg"></div><span class="lbl">exchange</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/exchange-small.svg"></div><span class="lbl">exch sm</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/gender-female.svg"></div><span class="lbl">female</span><span class="hex">#FF6FAD</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/gender-male.svg"></div><span class="lbl">male</span><span class="hex">#559CFF</span></div>
+<div class="cell"><div class="ic"><img src="../assets/icons/tip.svg"></div><span class="lbl">tip</span></div>
+<div class="cell"><div class="ic"></div></div>
+</div>
+</div>
+
+</body></html>

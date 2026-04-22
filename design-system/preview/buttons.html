@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet"><style>
+@font-face{font-family:"Alimama ShuHeiTi";src:url("../fonts/AlimamaShuHeiTi-Bold.otf") format("opentype");font-weight:700 900;font-display:swap}
+body{background:#000;color:#fff;font-family:"Alimama ShuHeiTi","Noto Sans SC","PingFang SC",sans-serif;margin:0;padding:22px 28px;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:18px}
+h4{margin:0 0 2px;font-size:10px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;font-family:Montserrat,sans-serif}
+
+/* ==== Vote buttons (treasure page, paired) ==== */
+.vote-row{display:flex;gap:10px;max-width:360px;padding-top:10px}
+.vote{position:relative;flex:1 1 0;height:58px;border-radius:46px;display:flex;align-items:center;justify-content:center;border:0;cursor:pointer;transition:transform 180ms cubic-bezier(0.2,0.9,0.25,1),filter 180ms}
+.vote-yes{background:#41390f}
+.vote-no{background:#083640}
+.vote .lbl{font-family:"Alimama ShuHeiTi","Noto Sans SC",sans-serif;font-size:20px;font-weight:700;line-height:1.2}
+.vote-yes .lbl{color:#fff09c}
+.vote-no .lbl{color:#b2f1ff}
+.vote .cnt{position:absolute;top:-9px;right:0;padding:3px 8px;border-radius:10px;font-family:Montserrat,sans-serif;font-size:12px;font-weight:500;line-height:12px}
+.vote-yes .cnt{background:#f4e490;color:#41390f}
+.vote-no .cnt{background:#9bdbea;color:#083640}
+
+/* ==== Publish result (image/voice finalize) ==== */
+.pub-row{display:flex;gap:10px;max-width:360px}
+.pub-btn{height:52px;border-radius:999px;padding:0 18px;font-size:16px;font-weight:600;border:0;cursor:pointer;font-family:"PingFang SC","Noto Sans SC",sans-serif;white-space:nowrap}
+.pub-sec{flex:0 0 auto;min-width:96px;background:rgba(255,255,255,.14);color:rgba(255,255,255,.9)}
+.pub-pri{flex:1 1 auto;background:linear-gradient(135deg,#ffffff 0%,#f3ece3 100%);color:#111;box-shadow:0 10px 28px rgba(255,255,255,.16)}
+
+/* ==== Coin banner ==== */
+.coin{display:inline-flex;align-items:center;justify-content:center;min-height:26px;padding:4px 8px;border-radius:20px;background:#45431e;color:#ffe4a4;font-family:"PingFang SC","Noto Sans SC",sans-serif;font-size:13px;font-weight:600;line-height:1}
+
+/* ==== Feed chips (有/换 circles) ==== */
+.chip{width:28px;height:28px;border-radius:18px;display:grid;place-items:center;font-family:"Alimama ShuHeiTi","Noto Sans SC",sans-serif;font-size:14px;font-weight:700;line-height:1}
+.chip-have{border:1.5px solid #fff;color:#fff}
+.chip-want{border:1.5px solid #ff8d2f;color:#ff8d2f}
+
+/* ==== Feed swap pill (sits between gallery images) ==== */
+.swap-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;width:56px;height:42px;border-radius:8px;background:linear-gradient(90deg,#2a2018 0%,#1a1410 50%,#2a2018 100%);overflow:hidden}
+.swap-wrap::before,.swap-wrap::after{content:"";position:absolute;top:0;bottom:0;width:50%;background-size:cover;background-position:center}
+.swap-wrap::before{left:0;background-image:url("https://images.unsplash.com/photo-1554941426-5b0f5a49a5a3?w=200&auto=format&fit=crop");opacity:.35}
+.swap-wrap::after{right:0;background-image:url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&auto=format&fit=crop");opacity:.35}
+.swap{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:2px;padding:6px 4px 6px 6px;border-radius:58px;background:#000;color:#dfe8f5;font-family:"Alimama ShuHeiTi","Noto Sans SC",sans-serif;font-size:12px;font-weight:700;line-height:1;border:0;cursor:pointer;z-index:1}
+.swap img{width:12px;height:12px}
+
+/* ==== Gender badge — rgba(0,0,0,.25) pill + colored number + line glyph ==== */
+.badge{display:inline-flex;align-items:center;gap:2px;padding:1px 4px 1px 0;border-radius:8px;background:rgba(0,0,0,.25)}
+.badge img{width:14px;height:14px}
+.badge span{font-family:Montserrat,sans-serif;font-size:12px;font-weight:500;line-height:14px}
+.g-f span{color:#ff6fad}
+.g-m span{color:#559cff}
+
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.cap{font-family:Montserrat,sans-serif;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.04em;margin-top:4px}
+.grp{display:flex;flex-direction:column;gap:6px}
+</style></head><body>
+<div class="grp">
+<h4>Vote buttons · 58px h · 46r · absolute count badge top:-9</h4>
+<div class="vote-row">
+  <button class="vote vote-no"><span class="cnt">1290人</span><span class="lbl">下一个</span></button>
+  <button class="vote vote-yes"><span class="cnt">2344人</span><span class="lbl">我想换</span></button>
+</div>
+</div>
+
+<div class="grp">
+<h4>Publish result · 52px h · primary is white→#f3ece3 gradient</h4>
+<div class="pub-row">
+  <button class="pub-btn pub-sec">重拍</button>
+  <button class="pub-btn pub-pri">发布</button>
+  <button class="pub-btn pub-pri" disabled style="opacity:.72;flex:0 0 auto;min-width:96px">发布</button>
+</div>
+</div>
+
+<div class="grp">
+<h4>Coin banner · 26h · #45431E / #FFE4A4 · 13/600</h4>
+<div class="row"><span class="coin">金币+100</span></div>
+</div>
+
+<div class="grp">
+<h4>Feed chips & swap pill · 28×28 have/want · black swap 12/700</h4>
+<div class="row">
+<span class="chip chip-have">有</span>
+<span class="chip chip-want">换</span>
+<span class="swap-wrap"><button class="swap">换<img src="../assets/icons/arrow-right.svg" alt=""></button></span>
+<span class="badge g-f"><img src="../assets/icons/gender-female.svg" alt=""><span>19</span></span>
+<span class="badge g-m"><img src="../assets/icons/gender-male.svg" alt=""><span>24</span></span>
+</div>
+</div>
+</body></html>

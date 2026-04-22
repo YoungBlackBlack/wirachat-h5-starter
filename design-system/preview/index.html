@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design System Preview</title>
+    <link rel="stylesheet" href="../colors_and_type.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 24px;
+        background: #000;
+        color: #fff;
+        font-family: "PingFang SC", sans-serif;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 16px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 10px;
+      }
+      li a {
+        display: block;
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+        color: #ffe26a;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      li a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Design System Preview</h1>
+    <ul id="list"></ul>
+    <script>
+      const pages = [
+        "colors-base",
+        "colors-accents",
+        "colors-whites",
+        "colors-capsule-pair",
+        "type-display",
+        "type-body",
+        "type-number",
+        "spacing",
+        "radii",
+        "shadows",
+        "motion",
+        "iconography",
+        "logo",
+        "buttons",
+        "cards",
+        "bubbles",
+        "voice-wave",
+      ];
+      const ul = document.getElementById("list");
+      pages.forEach((name) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `./${name}.html`;
+        a.textContent = name;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+    </script>
+  </body>
+</html>

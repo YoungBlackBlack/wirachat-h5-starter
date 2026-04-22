@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><style>
+body{background:#000;color:#fff;font-family:"Montserrat",sans-serif;margin:0;padding:28px;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.row{display:flex;gap:12px;align-items:center}
+.lbl{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.04em;width:90px;flex-shrink:0}
+.val{font-size:11px;color:#fff;font-weight:600;width:86px;flex-shrink:0}
+.note{font-size:11px;color:rgba(255,255,255,.5)}
+svg{flex-shrink:0}
+h4{margin:0 0 4px;font-size:11px;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase}
+</style></head><body>
+<h4>Easing</h4>
+<div class="row"><span class="lbl">out-swift</span>
+<svg width="70" height="28" viewBox="0 0 70 28"><path d="M2 26 C18 26 25 4 68 2" stroke="#fff09c" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+<span class="val">0.22,1,0.36,1</span><span class="note">screen / card / fade</span></div>
+<div class="row"><span class="lbl">press</span>
+<svg width="70" height="28" viewBox="0 0 70 28"><path d="M2 26 C14 26 22 8 68 2" stroke="#b2f1ff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+<span class="val">0.2,0.9,0.25,1</span><span class="note">:active scale</span></div>
+<h4 style="margin-top:10px">Duration</h4>
+<div class="row"><span class="lbl">fast</span><span class="val">120ms</span><span class="note">fade micro</span></div>
+<div class="row"><span class="lbl">base</span><span class="val">180ms</span><span class="note">hover, color, tab indicator</span></div>
+<div class="row"><span class="lbl">slow</span><span class="val">260ms</span><span class="note">screen slide-in</span></div>
+<div class="row"><span class="lbl">card</span><span class="val">560ms</span><span class="note">treasure flick exit</span></div>
+</body></html>

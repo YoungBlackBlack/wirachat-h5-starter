@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <title>IM Playground</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0b0b0f;
+        color: #f2f2f2;
+        font-family: "PingFang SC", "Helvetica Neue", sans-serif;
+        min-height: 100vh;
+      }
+      main {
+        padding: 20px;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 8px;
+      }
+      p.hint {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 13px;
+        margin: 0 0 16px;
+      }
+      section {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 16px;
+      }
+      section h2 {
+        font-size: 14px;
+        margin: 0 0 10px;
+        color: rgba(255, 255, 255, 0.75);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 4px;
+      }
+      input,
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        padding: 8px 10px;
+        color: #fff;
+        font-size: 14px;
+        font-family: inherit;
+      }
+      textarea {
+        min-height: 64px;
+        resize: vertical;
+      }
+      button {
+        background: #ffe26a;
+        color: #111;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-right: 8px;
+        margin-top: 8px;
+      }
+      button[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      button.secondary {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .row > div {
+        min-width: 0;
+      }
+      pre.log {
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 12px;
+        max-height: 280px;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .kv {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .kv span {
+        color: #ffe26a;
+      }
+      .status {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        margin-left: 8px;
+      }
+      .status.ok {
+        background: rgba(166, 243, 216, 0.18);
+        color: #a6f3d8;
+      }
+      .status.warn {
+        background: rgba(243, 224, 138, 0.18);
+        color: #f3e08a;
+      }
+      .status.err {
+        background: rgba(243, 166, 166, 0.18);
+        color: #f3a6a6;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>
+        IM Playground
+        <span id="statusBadge" class="status warn">未登录</span>
+      </h1>
+      <p class="hint">
+        用于联调后端 <code>/api/im/session</code> 与腾讯 IM SDK。身份优先来自 WebView Bridge,
+        其次 URL <code>?testAs=&amp;testKey=</code>,最后手动粘贴 JWT。
+      </p>
+
+      <section>
+        <h2>1. 身份</h2>
+        <div class="kv">
+          userId: <span id="kvUserId">-</span> &nbsp; imUserId:
+          <span id="kvImUserId">-</span> &nbsp; imEnv: <span id="kvImEnv">-</span>
+        </div>
+        <div style="margin-top: 10px">
+          <label>手动 token(可选,留空则走 WebView / 已有 localStorage)</label>
+          <input id="manualToken" placeholder="paste JWT..." />
+          <button id="btnApplyToken" class="secondary">应用 token</button>
+          <button id="btnResolve">解析身份</button>
+          <button id="btnLogin">登录 IM</button>
+          <button id="btnLogout" class="secondary">登出</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>2. 账号导入(可选)</h2>
+        <p class="hint">
+          新建 IM 账号前需要先在后端 <code>/api/im/users/import</code> 导入。示例为给当前用户做一次 upsert。
+        </p>
+        <div class="row">
+          <div>
+            <label>nickname</label>
+            <input id="impNickname" placeholder="测试用户" />
+          </div>
+          <div>
+            <label>avatar</label>
+            <input id="impAvatar" placeholder="https://..." />
+          </div>
+        </div>
+        <button id="btnImport">导入当前用户</button>
+      </section>
+
+      <section>
+        <h2>3. 发送消息</h2>
+        <div class="row">
+          <div>
+            <label>对端 imUserId(含 env 前缀,例如 dev_42)</label>
+            <input id="peerImUserId" placeholder="dev_42" />
+          </div>
+          <div>
+            <label>内容</label>
+            <input id="msgText" placeholder="hello" />
+          </div>
+        </div>
+        <button id="btnSend" disabled>发送</button>
+      </section>
+
+      <section>
+        <h2>4. 日志</h2>
+        <button id="btnClearLog" class="secondary">清空</button>
+        <pre id="log" class="log"></pre>
+      </section>
+    </main>
+
+    <script src="/web/debug.js"></script>
+    <script src="/web/webview-identity.js"></script>
+    <script type="module">
+      import Api from "/web/api.js";
+      import { createImClient } from "/web/im-client.js";
+
+      const logEl = document.getElementById("log");
+      const badge = document.getElementById("statusBadge");
+      const kvUserId = document.getElementById("kvUserId");
+      const kvImUserId = document.getElementById("kvImUserId");
+      const kvImEnv = document.getElementById("kvImEnv");
+      const btnSend = document.getElementById("btnSend");
+
+      function log(...args) {
+        const text = args
+          .map((x) => {
+            if (typeof x === "string") return x;
+            try {
+              return JSON.stringify(x, null, 2);
+            } catch {
+              return String(x);
+            }
+          })
+          .join(" ");
+        const line = `[${new Date().toLocaleTimeString()}] ${text}\n`;
+        logEl.textContent += line;
+        logEl.scrollTop = logEl.scrollHeight;
+      }
+
+      function setBadge(level, text) {
+        badge.className = `status ${level}`;
+        badge.textContent = text;
+      }
+
+      let client = null;
+
+      async function resolveIdentity() {
+        log("解析身份中...");
+        try {
+          const me = await Api.getMe();
+          if (me?.userId) {
+            log("已登录(token 有效):", me);
+            return me;
+          }
+        } catch (err) {
+          log("getMe 失败:", err.message);
+        }
+        if (window.WebviewIdentity) {
+          try {
+            const result = await window.WebviewIdentity.bootIdentity({
+              requireIdentity: false,
+              timeoutMs: 1500,
+            });
+            if (result?.token) {
+              Api.setAuthToken(result.token);
+              log("WebView 登录成功:", result);
+              return result;
+            }
+          } catch (err) {
+            log("WebView 登录失败:", err.message);
+          }
+        }
+        setBadge("warn", "未登录");
+        log("身份解析未成功,请手动粘贴 token。");
+        return null;
+      }
+
+      async function refreshSession() {
+        try {
+          const session = await Api.getImSession();
+          if (session) {
+            kvUserId.textContent = session.userId ?? "-";
+            kvImUserId.textContent = session.imUserId ?? "-";
+            kvImEnv.textContent = session.imEnv ?? "-";
+          }
+          return session;
+        } catch (err) {
+          log("获取 IM session 失败:", err.message);
+          return null;
+        }
+      }
+
+      document.getElementById("btnApplyToken").addEventListener("click", () => {
+        const token = document.getElementById("manualToken").value.trim();
+        if (!token) return;
+        Api.setAuthToken(token);
+        log("已写入 token。");
+      });
+
+      document.getElementById("btnResolve").addEventListener("click", async () => {
+        await resolveIdentity();
+        await refreshSession();
+      });
+
+      document.getElementById("btnLogin").addEventListener("click", async () => {
+        try {
+          await resolveIdentity();
+          await refreshSession();
+          if (client?.loggedIn) {
+            log("已登录,跳过。");
+            return;
+          }
+          client = await createImClient();
+          client.on("ready", () => {
+            setBadge("ok", "已连接");
+            btnSend.disabled = false;
+            log("[IM] SDK ready");
+          });
+          client.on("not_ready", () => {
+            setBadge("warn", "未就绪");
+            btnSend.disabled = true;
+          });
+          client.on("message", (msg) => {
+            log("[IM] 收到消息:", {
+              from: msg.from,
+              to: msg.to,
+              type: msg.type,
+              text: msg.payload?.text,
+            });
+          });
+          client.on("error", (event) => log("[IM] error:", event?.data));
+          client.on("kicked", (event) => {
+            setBadge("err", "被踢");
+            log("[IM] kicked:", event?.data);
+          });
+          await client.login();
+          log("[IM] login 成功,userId =", client.session.imUserId);
+        } catch (err) {
+          setBadge("err", "登录失败");
+          log("登录异常:", err.message);
+        }
+      });
+
+      document.getElementById("btnLogout").addEventListener("click", async () => {
+        try {
+          if (client) await client.logout();
+          setBadge("warn", "未登录");
+          btnSend.disabled = true;
+          log("已登出 IM。");
+        } catch (err) {
+          log("登出异常:", err.message);
+        }
+      });
+
+      document.getElementById("btnImport").addEventListener("click", async () => {
+        try {
+          const session = await Api.getImSession();
+          if (!session?.userId) {
+            log("无法导入:尚未登录。");
+            return;
+          }
+          const res = await Api.importImUsers([
+            {
+              userId: session.userId,
+              nickname: document.getElementById("impNickname").value.trim() || undefined,
+              avatar: document.getElementById("impAvatar").value.trim() || undefined,
+            },
+          ]);
+          log("导入结果:", res);
+        } catch (err) {
+          log("导入失败:", err.message);
+        }
+      });
+
+      document.getElementById("btnSend").addEventListener("click", async () => {
+        if (!client?.loggedIn) {
+          log("请先登录 IM。");
+          return;
+        }
+        const to = document.getElementById("peerImUserId").value.trim();
+        const text = document.getElementById("msgText").value.trim();
+        if (!to || !text) {
+          log("请填 peerImUserId 和内容。");
+          return;
+        }
+        try {
+          const res = await client.sendText({ to, text });
+          log("发送成功:", { code: res?.code, time: res?.data?.message?.time });
+        } catch (err) {
+          log("发送失败:", err.message || err);
+        }
+      });
+
+      document.getElementById("btnClearLog").addEventListener("click", () => {
+        logEl.textContent = "";
+      });
+
+      // 启动时尝试自动解析身份(不强制)
+      resolveIdentity().then((id) => {
+        if (id) refreshSession();
+      });
+    </script>
+  </body>
+</html>
